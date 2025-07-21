@@ -1,0 +1,11 @@
+*.iml
+.gradle
+.idea
+local.properties
+/build
+/gradle/wrapper/gradle-wrapper.jar
+/gradlew
+/gradlew.bat
+/app/build/
+/app/release/
+*secrets*

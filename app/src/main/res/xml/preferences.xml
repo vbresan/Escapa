@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="@string/General"><CheckBoxPreference android:key="@string/preferences_playSounds_key" android:title="@string/PlaySounds" android:defaultValue="@string/preferences_playSounds_default_value"></CheckBoxPreference>
+
+</PreferenceCategory>
+
+</PreferenceScreen>

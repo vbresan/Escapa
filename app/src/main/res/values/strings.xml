@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Escapa aka Pilot Test</string>
+    <string name="GameOver">Game Over</string>
+    <string name="YouSurvived">You survived %1$.3f seconds.</string>
+</resources>

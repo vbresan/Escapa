@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="General">General</string>
+    <string name="PlaySounds">Play sounds</string>
+     
+    <string name="preferences_playSounds_key">playSounds</string>
+    <string name="preferences_playSounds_default_value">false</string>
+</resources>

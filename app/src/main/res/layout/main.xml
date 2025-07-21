@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    
+    <biz.binarysolutions.escapa.GameView
+        android:id="@+id/gameView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+    />
+    
+    <LinearLayout android:id="@+id/LinearLayoutAd01"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:background="@drawable/Black"
+        android:gravity="center"
+        >
+        
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adUnitId="@string/admob_ad_id"
+            ads:adSize="BANNER"
+        />
+       
+    </LinearLayout>    
+    
+</LinearLayout>
