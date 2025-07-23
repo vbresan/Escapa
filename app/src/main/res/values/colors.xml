@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<drawable name="Black">#000000</drawable>
+	<color name="black">#000000</color>
 </resources>

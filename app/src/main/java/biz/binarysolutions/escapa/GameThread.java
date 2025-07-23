@@ -321,7 +321,7 @@ public class GameThread extends Thread {
 		
 		box.center(width, height);
 		
-		enemies[0].offsetTo(width - 70 - ENEMY0_WIDTH, 60);
+		enemies[0].offsetTo(width - 70 - ENEMY0_WIDTH, 70);
 		enemies[1].offsetTo(width - 70 - ENEMY1_WIDTH, height - 70 - ENEMY1_HEIGHT);
 		enemies[2].offsetTo(70, height - 70 - ENEMY2_HEIGHT);
 		enemies[3].offsetTo(70, 70);
