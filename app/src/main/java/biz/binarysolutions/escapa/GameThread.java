@@ -153,7 +153,7 @@ public class GameThread extends Thread {
 	 */
 	private void moveEnemies() {
 
-		double step = Math.log10(++framesCount);
+		double step = Math.pow(Math.log(++framesCount), 0.95);
 		
 		moveEnemy(0, (int) (-1.0 * step), (int) ( 1.2 * step));
 		moveEnemy(1, (int) (-1.2 * step), (int) (-2.0 * step));
