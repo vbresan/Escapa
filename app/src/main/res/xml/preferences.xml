@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
-<PreferenceCategory android:title="@string/General"><CheckBoxPreference android:key="@string/preferences_playSounds_key" android:title="@string/PlaySounds" android:defaultValue="@string/preferences_playSounds_default_value"></CheckBoxPreference>
-
-</PreferenceCategory>
-
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:title="@string/General"
+        app:iconSpaceReserved="false"
+        >
+        <SwitchPreferenceCompat
+            app:defaultValue="@string/preferences_playSounds_default_value"
+            app:key="@string/preferences_playSounds_key"
+            app:title="@string/PlaySounds"
+            app:iconSpaceReserved="false"
+        />
+    </PreferenceCategory>
 </PreferenceScreen>

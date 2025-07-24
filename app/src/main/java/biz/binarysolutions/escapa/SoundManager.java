@@ -5,9 +5,11 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 
+import java.util.Random;
+
 public class SoundManager {
 	
-	private static final int MAX_STREAMS = 5;
+	private static final int MAX_STREAMS = 10;
 	
 	private static SoundManager instance = null; 
 	
@@ -30,7 +32,8 @@ public class SoundManager {
 	}
 
 	private void play(int soundId) {
-		soundPool.play(soundId, volume, volume, 1, 0, 1f); 
+		float rate = 0.95f + (1.05f - 0.95f) * new Random().nextFloat();
+		soundPool.play(soundId, volume, volume, 1, 0, rate);
 	}
 
 	private SoundManager(Context context) {
