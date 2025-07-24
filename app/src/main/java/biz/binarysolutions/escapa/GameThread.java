@@ -7,6 +7,8 @@ import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import java.util.Arrays;
+
 /**
  * 
  *
@@ -41,25 +43,25 @@ public class GameThread extends Thread {
 	private int PLANE_PADDING = 50;
 	
 	
-	private SoundManager soundManager;
+	private final SoundManager soundManager;
 	
-	private Rectangle   plane;
-	private Rectangle   box;
-	private Rectangle[] enemies;
+	private final Rectangle   plane;
+	private final Rectangle   box;
+	private final Rectangle[] enemies;
 	
-	private int[] enemiesDirectionX = new int[] {1, 1, 1, 1};
-	private int[] enemiesDirectionY = new int[] {1, 1, 1, 1};
+	private final int[] enemiesDirectionX = new int[] {1, 1, 1, 1};
+	private final int[] enemiesDirectionY = new int[] {1, 1, 1, 1};
 	
 	
-	private SurfaceHolder holder;
-	private Handler handler;
+	private final SurfaceHolder holder;
+	private final Handler handler;
 	
 	private boolean isRunning = false;
 	private boolean isActive  = false;
 	
 	
-	private int width;
-	private int height;
+	private final int width;
+	private final int height;
 	
 	private boolean isBoxTouched = false;
 	private int startX;
@@ -68,10 +70,6 @@ public class GameThread extends Thread {
 	private long startTime   = 0;
 	private long framesCount = 0;
 
-	/**
-	 * 
-	 * @param canvas
-	 */
 	private void doDraw(Canvas canvas) {
 		
 		canvas.drawColor(BACKGROUND_COLOR);
@@ -86,9 +84,6 @@ public class GameThread extends Thread {
 		}
 	}
 	
-	/**
-	 * 
-	 */
 	private void playBounceSound() {
 		
 		new Thread() {
@@ -102,9 +97,6 @@ public class GameThread extends Thread {
 		}.start();
 	}
 	
-	/**
-	 * 
-	 */
 	private void playCrashSound() {
 		
 		new Thread() {
@@ -118,12 +110,6 @@ public class GameThread extends Thread {
 		}.start();
 	}	
 
-	/**
-	 * 
-	 * @param index
-	 * @param dx
-	 * @param dy
-	 */
 	private void moveEnemy(int index, int dx, int dy) {
 		
 		boolean directionChanged = false;
@@ -148,9 +134,6 @@ public class GameThread extends Thread {
 		);
 	}
 
-	/**
-	 * 
-	 */
 	private void moveEnemies() {
 
 		double step = Math.pow(Math.log(++framesCount), 0.95);
@@ -161,11 +144,6 @@ public class GameThread extends Thread {
 		moveEnemy(3, (int) ( 1.7 * step), (int) ( 1.1 * step));
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
 	private void onActionDown(int x, int y) {
 	
 		if (box.contains(x, y)) {
@@ -181,18 +159,10 @@ public class GameThread extends Thread {
 		}			
 	}
 
-	/**
-	 * 
-	 */
 	private void onActionUp() {
 		isBoxTouched = false;
 	}
 
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 */
 	private void onActionMove(int x, int y) {
 	
 		if (isBoxTouched) {
@@ -209,12 +179,9 @@ public class GameThread extends Thread {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	private boolean hasCollided() {
-		
+
+		//noinspection UnnecessaryLocalVariable
 		boolean hasCollided = 
 			!plane.contains(box)  ||
 			box.intersects(enemies[0]) ||
@@ -225,18 +192,10 @@ public class GameThread extends Thread {
 		return hasCollided;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	private double getPlayTime() {
 		return (System.currentTimeMillis() - startTime) / 1000.0;
 	}
 
-	/**
-	 * 
-	 * @param playTime
-	 */
 	private void sendMessage(double playTime) {
 		
 		Bundle bundle = new Bundle();
@@ -248,10 +207,6 @@ public class GameThread extends Thread {
 		handler.sendMessage(message);
 	}
 	
-	/**
-	 * 
-	 * @param density
-	 */
 	private void setDimensions(float density) {
 		
 		BOX_WIDTH  = (int) (BOX_WIDTH * density);
@@ -272,16 +227,14 @@ public class GameThread extends Thread {
 		PLANE_PADDING = (int) (PLANE_PADDING * density);
 	}
 
-	/**
-	 * 
-	 * @param density
-	 * @param width
-	 * @param height
-	 * @param soundManager2 
-	 * @param holder
-	 * @param handler
-	 */
-	public GameThread(float density, int width, int height, SurfaceHolder holder, Handler handler) {
+	public GameThread
+		(
+			float density,
+			int width,
+			int height,
+			SurfaceHolder holder,
+			Handler handler
+		) {
 		
 		this.holder  = holder;
 		this.handler = handler;
@@ -306,17 +259,10 @@ public class GameThread extends Thread {
 		plane.center(width, height);
 	}
 
-	/**
-	 * 
-	 * @param isRunning
-	 */
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
 
-	/**
-	 * 
-	 */
 	public void startNewGame() {
 		
 		box.center(width, height);
@@ -325,24 +271,15 @@ public class GameThread extends Thread {
 		enemies[1].offsetTo(width - 70 - ENEMY1_WIDTH, height - 70 - ENEMY1_HEIGHT);
 		enemies[2].offsetTo(70, height - 70 - ENEMY2_HEIGHT);
 		enemies[3].offsetTo(70, 70);
-		
-		for (int i = 0; i < enemiesDirectionX.length; i++) {
-			enemiesDirectionX[i] = 1;
-		}
-		for (int i = 0; i < enemiesDirectionY.length; i++) {
-			enemiesDirectionY[i] = 1;
-		}
+
+		Arrays.fill(enemiesDirectionX, 1);
+		Arrays.fill(enemiesDirectionY, 1);
 		
 		framesCount = 0;
 		isBoxTouched = false;
 		isActive = true;
 	}
 
-	/**
-	 * 
-	 * @param event
-	 * @return
-	 */
 	public boolean onTouch(MotionEvent event) {
 		
 		if (!isActive) {
@@ -350,16 +287,17 @@ public class GameThread extends Thread {
 		}
 		
 		int action = event.getAction();
+		//noinspection EnhancedSwitchMigration
 		switch (action) {
-		
+
 		case MotionEvent.ACTION_DOWN:
 			onActionDown((int) event.getX(), (int) event.getY());
 			return true;
-			
+
 		case MotionEvent.ACTION_UP:
 			onActionUp();
 			return true;
-			
+
 		case MotionEvent.ACTION_MOVE:
 			onActionMove((int) event.getX(), (int) event.getY());
 			return true;
