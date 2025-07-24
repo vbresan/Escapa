@@ -3,29 +3,22 @@ package biz.binarysolutions.escapa;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 
-/**
- * 
- *
- */
 public class SoundManager {
 	
-	private static final int MAX_STREAMS = 10;
+	private static final int MAX_STREAMS = 5;
 	
 	private static SoundManager instance = null; 
 	
-	private SoundPool soundPool;
+	private final SoundPool soundPool;
 	
 	private float volume;
 	private boolean shouldPlay = false;
 	
-	private int crashId;
-	private int bounceId;
+	private final int crashId;
+	private final int bounceId;
 	
-	/**
-	 * @param context
-	 * 
-	 */
 	private void setVolume(Context context) {
 		
 		AudioManager manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -36,41 +29,31 @@ public class SoundManager {
 		volume = currentVolume / maxVolume;  		
 	}
 
-	/**
-	 * 
-	 */
 	private void play(int soundId) {
 		soundPool.play(soundId, volume, volume, 1, 0, 1f); 
 	}
 
-	/**
-	 * @param context 
-	 * 
-	 */
 	private SoundManager(Context context) {
-		
-		soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
-		
+
+		if (Build.VERSION.SDK_INT >= 21) {
+			soundPool = new SoundPool.Builder().setMaxStreams(MAX_STREAMS).build();
+		} else {
+			soundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
+		}
+
 		crashId  = soundPool.load(context, R.raw.crash, 1);
 		bounceId = soundPool.load(context, R.raw.bounce, 1);
 		
 		setVolume(context);
 	}
 	
-	/**
-	 * 
-	 */
 	public void playCrash() {
 		
 		if (shouldPlay) {
 			play(crashId);
 		}
-		
 	}
 	
-	/**
-	 * 
-	 */
 	public void playBounce() {
 		
 		if (shouldPlay) {
@@ -78,18 +61,10 @@ public class SoundManager {
 		}
 	}
 
-	/**
-	 * 
-	 * @param playSounds
-	 */
 	public void setShouldPlay(boolean shouldPlay) {
 		this.shouldPlay = shouldPlay;
 	}
 
-	/**
-	 * 
-	 * @param context
-	 */
 	public static void createInstance(Context context) {
 
 		if (instance == null) {
@@ -97,10 +72,6 @@ public class SoundManager {
 		}
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public static SoundManager getInstance() {
 		return instance;
 	}	

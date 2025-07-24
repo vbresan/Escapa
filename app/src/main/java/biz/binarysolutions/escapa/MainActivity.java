@@ -5,19 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-/**
- * 
- *
- */
 public class MainActivity extends Activity {
 	
 	@Override
@@ -40,7 +37,7 @@ public class MainActivity extends Activity {
 		super.onResume();
 		
 		SharedPreferences preferences = 
-			PreferenceManager.getDefaultSharedPreferences(this);	
+			PreferenceManager.getDefaultSharedPreferences(this);
 		
 		String key          = getString(R.string.preferences_playSounds_key);
 		String defaultValue = getString(R.string.preferences_playSounds_default_value);
@@ -63,15 +60,10 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
-	 	switch (item.getItemId()) {
-	 	
-	    case R.id.menuItemSettings:
+
+	 	if (item.getItemId() == R.id.menuItemSettings) {
 	    	startActivity(new Intent(this, PreferencesActivity.class));
 	    	return true;
-	    	
-	    default:
-	    	break;
 	    }
 		
 		return super.onOptionsItemSelected(item);

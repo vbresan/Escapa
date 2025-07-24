@@ -9,10 +9,6 @@ import android.view.SurfaceHolder;
 
 import java.util.Arrays;
 
-/**
- * 
- *
- */
 public class GameThread extends Thread {
 		
 	private static final int COLOR_BLACK = 0xFF000000;
@@ -331,8 +327,8 @@ public class GameThread extends Thread {
 					}
 	            	
 	            	if (hasCollided()) {
-	            		
-	            		playCrashSound();
+
+						playCrashSound();
 		            	sendMessage(getPlayTime());
 		            	
 						isActive = false;
