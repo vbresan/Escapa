@@ -1,6 +1,5 @@
 package biz.binarysolutions.escapa;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -9,13 +8,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         
         this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        SoundManager.createInstance(this);
+		SoundManager.createInstance(this);
 
 		MobileAds.initialize(this);
 		AdView mAdView = (AdView) findViewById(R.id.adView);

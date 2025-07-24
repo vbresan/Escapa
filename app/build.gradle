@@ -26,6 +26,9 @@ android {
 }
 
 dependencies {
+
+    implementation "androidx.preference:preference:1.2.1"
+
     // version 24.0.0+ requires min SDK 23
     implementation "com.google.android.gms:play-services-ads:23.6.0"
 }
