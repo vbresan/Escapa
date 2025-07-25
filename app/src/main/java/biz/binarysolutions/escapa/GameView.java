@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -16,10 +17,13 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 
 public class GameView
 	extends SurfaceView 
 	implements SurfaceHolder.Callback, OnTouchListener, OnClickListener {
+
+	private static final String PREFERENCES_KEY_HIGH_SCORE = "highScore";
 
 	private final Handler handler = new Handler(Looper.getMainLooper()) {
 		@Override
@@ -42,9 +46,35 @@ public class GameView
 		}		
 	}
 
+	private double getOrSaveHighScore(double playTime) {
+
+		SharedPreferences preferences =
+			PreferenceManager.getDefaultSharedPreferences(context);
+
+		// stupid preferences do not support double values directly
+		String string = preferences.getString(PREFERENCES_KEY_HIGH_SCORE, "0.0");
+		double highScore = Double.parseDouble(string);
+		if (highScore > playTime) {
+			return highScore;
+		} else {
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.putString(PREFERENCES_KEY_HIGH_SCORE, String.valueOf(playTime));
+			editor.apply();
+			return playTime;
+		}
+	}
+
 	private void postToLeaderBoard(double playTime) {
 
-		String message = context.getString(R.string.YouSurvived, playTime);
+		String message;
+
+		double highScore = getOrSaveHighScore(playTime);
+		if (highScore > playTime) {
+			message = context.getString(R.string.YouSurvived, playTime, highScore);
+		} else {
+			message = context.getString(R.string.NewRecord, playTime);
+		}
+
 		new AlertDialog.Builder(context)
 			.setTitle(R.string.GameOver)
 			.setMessage(message)
