@@ -1,0 +1,1 @@
+Original game (i.e. it's latest archive.org snapshot) is [here](https://web.archive.org/web/20041217015124/http://www.xeron.org/cosas/escapa.htm).
