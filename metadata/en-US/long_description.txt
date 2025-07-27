@@ -1,0 +1,3 @@
+Once famous internet game ported to Android
+
+Touch and hold the red square. Move it so that you neither touch the walls nor get hit by any of the blue blocks.
