@@ -37,6 +37,8 @@ public class GameThread extends Thread {
 	private int ENEMY3_HEIGHT = 60;
 	
 	private int PLANE_PADDING = 25;
+
+	private double SPEED_UP = 5.7e-7;
 	
 	
 	private final SoundManager soundManager;
@@ -132,7 +134,7 @@ public class GameThread extends Thread {
 
 	private void moveEnemies() {
 
-		double step = Math.pow(Math.log(++framesCount), 0.95);
+		double step = Math.pow(Math.log(++framesCount), SPEED_UP);
 		
 		moveEnemy(0, (int) (-1.0 * step), (int) ( 1.2 * step));
 		moveEnemy(1, (int) (-1.2 * step), (int) (-2.0 * step));
@@ -203,24 +205,26 @@ public class GameThread extends Thread {
 		handler.sendMessage(message);
 	}
 	
-	private void setDimensions(float density) {
+	private void setConstants(float density) {
+
+		BOX_WIDTH  *= density;
+		BOX_HEIGHT *= density;
 		
-		BOX_WIDTH  = (int) (BOX_WIDTH * density);
-		BOX_HEIGHT = (int) (BOX_HEIGHT * density);
+		ENEMY0_WIDTH  *= density;
+		ENEMY0_HEIGHT *= density;
 		
-		ENEMY0_WIDTH  = (int) (ENEMY0_WIDTH * density);
-		ENEMY0_HEIGHT = (int) (ENEMY0_HEIGHT * density);
+		ENEMY1_WIDTH  *= density;
+		ENEMY1_HEIGHT *= density;
 		
-		ENEMY1_WIDTH  = (int) (ENEMY1_WIDTH * density);
-		ENEMY1_HEIGHT = (int) (ENEMY1_HEIGHT * density);
+		ENEMY2_WIDTH  *= density;
+		ENEMY2_HEIGHT *= density;
 		
-		ENEMY2_WIDTH  = (int) (ENEMY2_WIDTH * density);
-		ENEMY2_HEIGHT = (int) (ENEMY2_HEIGHT * density);
+		ENEMY3_WIDTH  *= density;
+		ENEMY3_HEIGHT *= density;
 		
-		ENEMY3_WIDTH  = (int) (ENEMY3_WIDTH * density);
-		ENEMY3_HEIGHT = (int) (ENEMY3_HEIGHT * density);
-		
-		PLANE_PADDING = (int) (PLANE_PADDING * density);
+		PLANE_PADDING *= density;
+
+		SPEED_UP *= width * height;
 	}
 
 	public GameThread
@@ -237,8 +241,8 @@ public class GameThread extends Thread {
 		
 		this.width  = width;
 		this.height = height;
-		
-		setDimensions(density);
+
+		setConstants(density);
 		
 		soundManager = SoundManager.getInstance();
 		
