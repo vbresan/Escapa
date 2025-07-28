@@ -11,24 +11,17 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 public class MainActivity extends AppCompatActivity {
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		SoundManager.createInstance(this);
 
-		MobileAds.initialize(this);
-		AdView mAdView = (AdView) findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		mAdView.loadAd(adRequest);
+		new FlavorSpecific(this).initialize();
     }
     
     

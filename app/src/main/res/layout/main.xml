@@ -15,23 +15,14 @@
         android:layout_weight="1.0"
     />
     
-    <LinearLayout android:id="@+id/LinearLayoutAd01"
-        android:layout_width="fill_parent" 
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
         android:background="@color/black"
         android:gravity="center"
         >
-        
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adUnitId="@string/admob_ad_id"
-            ads:adSize="BANNER"
-        />
-       
-    </LinearLayout>    
+        <include layout="@layout/flavor_specific" />
+    </LinearLayout>
     
 </LinearLayout>

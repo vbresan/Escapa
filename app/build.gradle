@@ -23,6 +23,22 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-project.txt"
         }
     }
+
+    flavorDimensions = ["ads"]
+    productFlavors {
+        withAds {
+            dimension "ads"
+        }
+        withoutAds {
+            dimension "ads"
+
+            minSdk 15   // android 4.0.4
+            dependenciesInfo {
+                includeInApk = false
+                includeInBundle = false
+            }
+        }
+    }
 }
 
 dependencies {
@@ -30,5 +46,5 @@ dependencies {
     implementation "androidx.preference:preference:1.2.1"
 
     // version 24.0.0+ requires min SDK 23
-    implementation "com.google.android.gms:play-services-ads:23.6.0"
+    withAdsImplementation "com.google.android.gms:play-services-ads:23.6.0"
 }
