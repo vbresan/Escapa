@@ -10,7 +10,7 @@ import android.view.SurfaceHolder;
 import java.util.Arrays;
 
 public class GameThread extends Thread {
-		
+
 	private static final int COLOR_BLACK = 0xFF000000;
 	private static final int COLOR_WHITE = 0xFFFFFFFF;
 	private static final int COLOR_RED   = 0xFF990000;
@@ -20,7 +20,7 @@ public class GameThread extends Thread {
 	private static final int PLANE_COLOR      = COLOR_WHITE;
 	private static final int BOX_COLOR        = COLOR_RED;
 	private static final int ENEMY_COLOR      = COLOR_BLUE;
-	
+
 	private int BOX_WIDTH  = 40;
 	private int BOX_HEIGHT = 40;
 	
@@ -36,7 +36,7 @@ public class GameThread extends Thread {
 	private int ENEMY3_WIDTH  = 60;
 	private int ENEMY3_HEIGHT = 60;
 	
-	private int PLANE_PADDING = 50;
+	private int PLANE_PADDING = 25;
 	
 	
 	private final SoundManager soundManager;
@@ -242,7 +242,7 @@ public class GameThread extends Thread {
 		
 		soundManager = SoundManager.getInstance();
 		
-		plane = new Rectangle(PLANE_COLOR, width - PLANE_PADDING, height - PLANE_PADDING);
+		plane = new Rectangle(PLANE_COLOR, width - PLANE_PADDING * 2, height - PLANE_PADDING * 2);
 		box   = new Rectangle(BOX_COLOR, BOX_WIDTH, BOX_HEIGHT);
 		
 		enemies = new Rectangle[] {
@@ -262,11 +262,11 @@ public class GameThread extends Thread {
 	public void startNewGame() {
 		
 		box.center(width, height);
-		
-		enemies[0].offsetTo(width - 70 - ENEMY0_WIDTH, 70);
-		enemies[1].offsetTo(width - 70 - ENEMY1_WIDTH, height - 70 - ENEMY1_HEIGHT);
-		enemies[2].offsetTo(70, height - 70 - ENEMY2_HEIGHT);
-		enemies[3].offsetTo(70, 70);
+
+		enemies[0].offsetTo(width - PLANE_PADDING - ENEMY0_WIDTH, PLANE_PADDING);
+		enemies[1].offsetTo(width - PLANE_PADDING - ENEMY1_WIDTH, height - PLANE_PADDING - ENEMY1_HEIGHT);
+		enemies[2].offsetTo(PLANE_PADDING, height - PLANE_PADDING - ENEMY2_HEIGHT);
+		enemies[3].offsetTo(PLANE_PADDING, PLANE_PADDING);
 
 		Arrays.fill(enemiesDirectionX, 1);
 		Arrays.fill(enemiesDirectionY, 1);
