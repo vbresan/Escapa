@@ -7,5 +7,5 @@ local.properties
 /gradlew
 /gradlew.bat
 /app/build/
-/app/release/
+**/release/
 *secrets*
