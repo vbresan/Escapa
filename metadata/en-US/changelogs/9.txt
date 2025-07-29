@@ -1,2 +1,6 @@
-2.0.1 ()
+2.0.1 (2025.07.29)
 
+* adding screen size dependant acceleration factor
+* updating launcher icon
+* saving personal record
+* replacing sounds
