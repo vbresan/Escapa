@@ -333,8 +333,8 @@ public class GameThread extends Thread {
 	            	if (hasCollided()) {
 
 						playCrashSound();
-		            	sendMessage(getPlayTime());
-		            	
+						sendMessage(getPlayTime());
+
 						isActive = false;
 						startTime = 0;
 					}
