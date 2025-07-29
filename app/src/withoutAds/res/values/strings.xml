@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="donation_url" translatable="false">https://ko-fi.com/vbresan/?utm_source=escapa&amp;utm_medium=app&amp;utm_campaign=regular</string>
+
+    <string name="SupportOS">Support open-source</string>
+    <string name="SupportDialogTitle">Enjoying the game?</string>
+    <string name="SupportDialogText">If you would like to show appreciation,
+        tap below to buy the developer a coffee.
+    </string>
+    <string name="Continue">Continue</string>
+</resources>
